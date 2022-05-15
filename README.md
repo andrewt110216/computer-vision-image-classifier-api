@@ -3,9 +3,9 @@
 ## Introduction
 This site represents a **simple** project with a few learning objectives, including:
 
- - Learn the basics of image classification using computer vision with Pytorch
- - Create a lightweight web application using Flask
- - Deploy an application to the web using Heroku
+ - Learn the basics of computer vision modelling with Pytorch
+ - Create a REST API with Flask
+ - Deploy a web appliction using Heroku
 
 ## How to Use the API
 1. Download an image and save it as a JPEG file
