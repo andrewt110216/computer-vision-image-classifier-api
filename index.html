@@ -22,11 +22,16 @@
     <div>
         <ol>
             <li>Choose an image that you would like to classify, and save it as a JPEG file</li>
-            <li>Send a POST request to this API at the endpoint '/predict' with the JPEG in the body
-                of the request, using the key 'file'</li>
+            <li>Next, either:
+                <ul>
+                    <li>Navigate to the <a href='/predict'>predict</a> page to upload your file to the API, or</li>
+                    <li>Send a POST request to this API at the endpoint '/predict' with the JPEG in the body
+                    of the request, using the key 'file'</li>
+                </ul>
+            </li>
             <li>You will receive back a JSON object including the model's top 5 class predictions.
-                For each prediction, you will receive the class ID, class name, and the model's confidence
-                level in the prediction.</li>
+            For each prediction, you will receive the class ID, class name, and the model's confidence
+            level in the prediction.</li>
         </ol>
     </div>
     <h2>Additional Comments</h2>
@@ -40,7 +45,7 @@
         </p>
         <p>As a future project, I hope to narrow the focus of the API to a particular subset of image classes
             (e.g. zoo animals or food items), and use Transfer Learning to enhance the model's accuracy. But, as much as
-            I'd like to dive into that now! It is outside of the scope of what I set out to do at this time.
+            I'd like to dive into that now!...it is outside of the scope of what I set out to do at this time.
         </p>
         <p>Thanks to the Coursera Project Network for guidance on this project.</p>
     </div>

@@ -30,11 +30,11 @@ def allowed_file(filename: str) -> bool:
 def index():
     try:
         with open('index.html') as f:
-            html_str = f.read()
+            html_index = f.read()
     except:
         with open('project/index.html') as f:
-            html_str = f.read()
-    return html_str
+            html_index = f.read()
+    return html_index
 
 def image_transformation(image_bytes: bytes):  # TODO: confirm output type
     # create transformer
@@ -62,7 +62,7 @@ def prediction(image_bytes: bytes):  # TODO: confirm output type
     return top_5
 
 # handle inbound image
-@app.route('/predict', methods=['POST'])
+@app.route('/predict', methods=['GET', 'POST'])
 def predict():
     if request.method == 'POST':
         file = request.files['file']
@@ -74,7 +74,16 @@ def predict():
             top_5 = prediction(image_bytes)
             return jsonify(top_5)
 
-    return 'Error: could not predict string'
+        return 'Error: could not predict string'
+        
+    elif request.method == 'GET':
+        try:
+            with open('predict.html') as f:
+                html_predict = f.read()
+        except:
+            with open('project/predict.html') as f:
+                html_predict = f.read()
+        return html_predict
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
