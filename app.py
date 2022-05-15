@@ -13,7 +13,10 @@ ALLOWED_EXTENSIONS = {'jpg', 'jpeg'}
 # set pretrained computer vision model from pytorch
 # possible options: resnet101, googlenet
 model = models.googlenet(pretrained=True)
-imagenet_index = json.load(open('project/imagenet_class_index.json'))
+try:
+    imagenet_index = json.load(open('imagenet_class_index.json'))
+except:
+    imagenet_index = json.load(open('project/imagenet_class_index.json'))
 
 def allowed_file(filename: str) -> bool:
     """Check that the filename is in the set of allowed extensions"""
@@ -25,8 +28,12 @@ def allowed_file(filename: str) -> bool:
 # set return string for home page request
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    with open('index.html') as f:
-        html_str = f.read()
+    try:
+        with open('index.html') as f:
+            html_str = f.read()
+    except:
+        with open('project/index.html') as f:
+            html_str = f.read()
     return html_str
 
 def image_transformation(image_bytes: bytes):  # TODO: confirm output type
