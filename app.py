@@ -48,9 +48,15 @@ def image_transformation(image_bytes: bytes):  # TODO: confirm output type
 
 def prediction(image_bytes: bytes):  # TODO: confirm output type
     tensor = image_transformation(image_bytes)
+
+    # convert transformed tensor back to PIL image for debugging purposes
+    # transform_to_pil = T.ToPILImage()
+    # transformed_pil = transform_to_pil(tensor[0])
+    # transformed_pil.show()
+
     model_output = model.forward(tensor)
     _, indices = torch.sort(model_output, descending=True)
-    percentages = torch.nn.functional.softmax(model_output, dim=1)[0] * 100
+    percentages = torch.nn.functional.softmax(model_output, dim=1)[0]
     top_5 = {}
     for i in range(5):
         idx = indices[0][i].item()
@@ -58,7 +64,7 @@ def prediction(image_bytes: bytes):  # TODO: confirm output type
         confidence = percentages[idx].item()
         top_5[i+1] = {'class_id': class_id,
                     'class name': class_name,
-                    'confidence %': f'{confidence:.0%}'}
+                    'confidence %': f'{confidence:.3%}'}
     return top_5
 
 # handle inbound image
@@ -74,7 +80,7 @@ def predict():
             top_5 = prediction(image_bytes)
             return jsonify(top_5)
 
-        return 'Error: could not predict string'
+        return 'Error: was unable to process the image file through the model. Note that the file must be a JPEG.'
         
     elif request.method == 'GET':
         try:

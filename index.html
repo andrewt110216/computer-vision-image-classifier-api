@@ -37,11 +37,11 @@
     <h2>Additional Comments</h2>
     <div>
         <p>The API uses a pretrained Pytorch model (googlenet) that was trained on ImageNet. No additional
-            training has been done. As a result, the model does not always work very well at classifying images (maybe
+            training has been done. As a result, the model doesn't, umm...work at all really (maybe
             that was something I should have said at the top!). This is the reason that I decided to return the
-            top 5 predictions from the model, instead of only the top prediction, along with the confidence level.
-            Obviously, if you see 5 predictions that don't seem like related classes, each with relatively similar
-            confidence levels, the model didn't work very well. Sorry :(
+            top 5 predictions from the model, instead of only the top prediction, along with the confidence levels.
+            Obviously, if you see 5 predictions that don't seem like related classes, each with very low
+            confidence levels, then the model didn't work very well. Sorry :(
         </p>
         <p>As a future project, I hope to narrow the focus of the API to a particular subset of image classes
             (e.g. zoo animals or food items), and use Transfer Learning to enhance the model's accuracy. But, as much as
