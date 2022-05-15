@@ -13,9 +13,9 @@
     <h2>Introduction</h2>
     <div>This site represents a simple project with a few learning objectives, including:
         <ul>
-            <li>Learn the basics of image classification using computer vision with Pytorch</li>
-            <li>Create a lightweight web application using Flask</li>
-            <li>Deploy an application to the web using Heroku</li>
+            <li>Learn the basics of computer vision modelling with Pytorch</li>
+            <li>Create a REST API with Flask</li>
+            <li>Deploy a web appliction using Heroku</li>
         </ul>
     <div>
     <h2>How to Use the API</h2>
@@ -36,16 +36,21 @@
     </div>
     <h2>Additional Comments</h2>
     <div>
-        <p>The API uses a pretrained Pytorch model (googlenet) that was trained on ImageNet. No additional
-            training has been done. As a result, the model doesn't, umm...work at all really (maybe
-            that was something I should have said at the top!). This is the reason that I decided to return the
-            top 5 predictions from the model, instead of only the top prediction, along with the confidence levels.
-            Obviously, if you see 5 predictions that don't seem like related classes, each with very low
-            confidence levels, then the model didn't work very well. Sorry :(
+        <p>The API uses a pretrained Pytorch model (googlenet) that was trained on 
+            ImageNet. No additional training has been done. As a result, the model 
+            doesn't, umm...work at all really (maybe that was something I should 
+            have said at the top!). This is the reason that I decided to return 
+            the top 5 predictions from the model, instead of only the top 
+            prediction, along with the confidence levels. Obviously, if you see 
+            5 predictions that don't seem like related classes, each with very 
+            low confidence levels, then the model didn't work very well. Sorry :(
         </p>
-        <p>As a future project, I hope to narrow the focus of the API to a particular subset of image classes
-            (e.g. zoo animals or food items), and use Transfer Learning to enhance the model's accuracy. But, as much as
-            I'd like to dive into that now!...it is outside of the scope of what I set out to do at this time.
+        <p>As a future project, I hope to narrow the focus of the API to a 
+            particular subset of image classes (e.g. zoo animals or food items),
+             and use transfer learning to get the model to actually work and return
+             moderately accurate results. But, as much as I'd love to dive into 
+             that now!...it is outside of the scope of what I set out to do at 
+             this time.
         </p>
         <p>Thanks to the Coursera Project Network for guidance on this project.</p>
     </div>
