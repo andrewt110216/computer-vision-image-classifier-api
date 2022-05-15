@@ -25,7 +25,9 @@ def allowed_file(filename: str) -> bool:
 # set return string for home page request
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    return "Welcome to the Deploying A Pytorch Model with Flask App!"
+    with open('index.html') as f:
+        html_str = f.read()
+    return html_str
 
 def image_transformation(image_bytes: bytes):  # TODO: confirm output type
     # create transformer
@@ -40,10 +42,17 @@ def image_transformation(image_bytes: bytes):  # TODO: confirm output type
 def prediction(image_bytes: bytes):  # TODO: confirm output type
     tensor = image_transformation(image_bytes)
     model_output = model.forward(tensor)
-    _, predicted_index = torch.max(model_output, 1)
+    _, indices = torch.sort(model_output, descending=True)
     percentages = torch.nn.functional.softmax(model_output, dim=1)[0] * 100
-    percentage = percentages[predicted_index[0]].item()
-    return (imagenet_index[str(predicted_index.item())], percentage)
+    top_5 = {}
+    for i in range(5):
+        idx = indices[0][i].item()
+        class_id, class_name = imagenet_index[str(idx)]
+        confidence = percentages[idx].item()
+        top_5[i+1] = {'class_id': class_id,
+                    'class name': class_name,
+                    'confidence %': f'{confidence:.0%}'}
+    return top_5
 
 # handle inbound image
 @app.route('/predict', methods=['POST'])
@@ -55,10 +64,8 @@ def predict():
         if file and allowed_file(file.filename):
             # convert file to bytes
             image_bytes = file.read()
-            (class_id, class_name), percentage = prediction(image_bytes)
-            return jsonify({'class id': class_id,
-                            'class name': class_name,
-                            'confidence %': f'{percentage:.0%}'})
+            top_5 = prediction(image_bytes)
+            return jsonify(top_5)
 
     return 'Error: could not predict string'
 
