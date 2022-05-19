@@ -5,7 +5,7 @@ This site represents a **simple** project with a few learning objectives, includ
 
  - Learn the basics of computer vision modelling with Pytorch
  - Create a REST API with Flask
- - Deploy a web appliction using Heroku
+ - Deploy a web application using Heroku
 
 ## How to Use the API
 1. Download an image and save it as a JPEG file
