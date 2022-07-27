@@ -36,7 +36,7 @@ def index():
             html_index = f.read()
     return html_index
 
-def image_transformation(image_bytes: bytes):  # TODO: confirm output type
+def image_transformation(image_bytes: bytes) -> torch.tensor:
     # create transformer
     normalize = T.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
     img_transformations = T.Compose([T.Resize(255), T.ToTensor(), normalize])
@@ -46,14 +46,8 @@ def image_transformation(image_bytes: bytes):  # TODO: confirm output type
 
     return img_transformations(uploaded_image).unsqueeze(0)
 
-def prediction(image_bytes: bytes):  # TODO: confirm output type
+def prediction(image_bytes: bytes) -> dict[dict]:
     tensor = image_transformation(image_bytes)
-    print(type(tensor))
-
-    # convert transformed tensor back to PIL image for debugging purposes
-    # transform_to_pil = T.ToPILImage()
-    # transformed_pil = transform_to_pil(tensor[0])
-    # transformed_pil.show()
 
     model_output = model.forward(tensor)
     _, indices = torch.sort(model_output, descending=True)
