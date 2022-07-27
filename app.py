@@ -1,4 +1,3 @@
-# Imports
 from flask import Flask, jsonify, request
 import io
 import json
@@ -13,10 +12,7 @@ ALLOWED_EXTENSIONS = {'jpg', 'jpeg'}
 # set pretrained computer vision model from pytorch
 # possible options: resnet101, googlenet
 model = models.googlenet(pretrained=True)
-try:
-    imagenet_index = json.load(open('imagenet_class_index.json'))
-except:
-    imagenet_index = json.load(open('project/imagenet_class_index.json'))
+imagenet_index = json.load(open('imagenet_class_index.json'))
 
 def allowed_file(filename: str) -> bool:
     """Check that the filename is in the set of allowed extensions"""
@@ -28,12 +24,8 @@ def allowed_file(filename: str) -> bool:
 # set return string for home page request
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    try:
-        with open('index.html') as f:
-            html_index = f.read()
-    except:
-        with open('project/index.html') as f:
-            html_index = f.read()
+    with open('index.html') as f:
+        html_index = f.read()
     return html_index
 
 def image_transformation(image_bytes: bytes) -> torch.tensor:
@@ -75,15 +67,11 @@ def predict():
             top_5 = prediction(image_bytes)
             return jsonify(top_5)
 
-        return 'Error: was unable to process the image file through the model. Note that the file must be a JPEG.'
-        
+        return "Error: unable to process image. File must be JPEG or JPG."
+
     elif request.method == 'GET':
-        try:
-            with open('predict.html') as f:
-                html_predict = f.read()
-        except:
-            with open('project/predict.html') as f:
-                html_predict = f.read()
+        with open('predict.html') as f:
+            html_predict = f.read()
         return html_predict
 
 if __name__ == "__main__":
