@@ -48,6 +48,7 @@ def image_transformation(image_bytes: bytes):  # TODO: confirm output type
 
 def prediction(image_bytes: bytes):  # TODO: confirm output type
     tensor = image_transformation(image_bytes)
+    print(type(tensor))
 
     # convert transformed tensor back to PIL image for debugging purposes
     # transform_to_pil = T.ToPILImage()
